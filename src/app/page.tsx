@@ -1,103 +1,119 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  SiDiscord,
+  SiGithub,
+  SiInstagram,
+  SiLinkedin,
+  SiX,
+} from "react-icons/si";
+
+import SkillsSection from "@/components/Skills";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="min-h-screen p-4 sm:p-8 font-helvetica">
+      <div className="max-w-4xl mx-auto space-y-8 sm:space-y-12">
+        <section className="relative py-12 sm:py-20 rounded-3xl">
+          <div className="absolute inset-0 bg-gradient-to-br from-foreground/5 to-transparent rounded-3xl" />
+          <div className="relative text-center space-y-4 sm:space-y-6">
+            <h1 className="text-4xl sm:text-7xl font-black bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Himanshu Saikia
+            </h1>
+            <div className="flex items-center justify-center gap-2 sm:gap-3">
+              <div className="h-[1px] w-8 sm:w-12 bg-foreground/30" />
+              <span className="text-lg sm:text-2xl px-2 rounded-full font-medium text-foreground/80 bg-gradient-to-br from-foreground/10 to-transparent">
+                Self-taught Developer
+              </span>
+              <div className="h-[1px] w-8 sm:w-12 bg-foreground/30" />
+            </div>
+          </div>
+        </section>
+        <section className="space-y-4">
+          <h2 className="text-2xl sm:text-3xl font-bold">About Me</h2>
+          <p className="text-base sm:text-lg leading-relaxed text-foreground/90">
+            Hey there! I&apos;m{" "}
+            <span className="font-semibold bg-foreground/20 px-2 pt-1 rounded-full">
+              Himanshu
+            </span>
+            , an 18-year-old{" "}
+            <span className="font-semibold bg-foreground/20 px-2 pt-1 rounded-full">
+              self-taught developer
+            </span>{" "}
+            and student with a passion for technology. As a dedicated{" "}
+            <span className="font-semibold bg-foreground/20 px-2 pt-1 rounded-full">
+              Linux enthusiast
+            </span>
+            , I thrive on exploring diverse distributions and delving deep into
+            system internals. My current focus lies in mastering{" "}
+            <span className="font-semibold bg-foreground/20 px-2 pt-1 rounded-full">
+              low-level programming
+            </span>{" "}
+            and pushing the boundaries of{" "}
+            <span className="font-semibold bg-foreground/20 px-2 pt-1 rounded-full">
+              web development
+            </span>
+            . I&apos;m always eager to embrace new challenges and technologies.
+          </p>
+        </section>
+        <SkillsSection />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <section className="text-center space-y-3 sm:space-y-4 bg-gradient-to-br from-foreground/5 to-transparent rounded-3xl p-6">
+          <h2 className="text-2xl sm:text-3xl font-bold">Get In Touch</h2>
+          <p className="text-base sm:text-lg">
+            I&apos;m open for freelancing opportunities and job positions!
+            Whether you have a project in mind or want to discuss potential
+            collaborations, feel free to reach out at{" "}
+            <a
+              href="mailto:mail@himonshuuu.co"
+              className="underline hover:text-foreground/70 transition-colors"
+            >
+              mail@himonshuuu.co
+            </a>
+          </p>
+          <div className="flex items-center justify-center gap-2">
+            <Link
+              href="https://github.com/himonshuuu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground/70 transition-colors bg-foreground/10 rounded-lg p-2"
+            >
+              <SiGithub size={24} />
+            </Link>
+            <Link
+              href="https://x.com/himonshuuu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground/70 transition-colors bg-foreground/10 rounded-lg p-2"
+            >
+              <SiX size={24} />
+            </Link>
+            <Link
+              href="https://linkedin.com/in/saikia-himangshu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground/70 transition-colors bg-foreground/10 rounded-lg p-2"
+            >
+              <SiLinkedin size={24} />
+            </Link>
+            <Link
+              href="https://instagram.com/himonshuuu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground/70 transition-colors bg-foreground/10 rounded-lg p-2"
+            >
+              <SiInstagram size={24} />
+            </Link>
+            <Link
+              href="https://discord.com/users/775660503342776341"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground/70 transition-colors bg-foreground/10 rounded-lg p-2"
+            >
+              <SiDiscord size={24} />
+            </Link>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }
