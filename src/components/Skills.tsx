@@ -68,7 +68,6 @@ import { FaAws, FaDiscord } from "react-icons/fa6";
 import { FiFramer } from "react-icons/fi";
 import { RiNextjsFill } from "react-icons/ri";
 import { VscCodeOss } from "react-icons/vsc";
-import { ProgressiveBlur } from "@/components/ui/blur";
 
 interface Item {
   name: string;
