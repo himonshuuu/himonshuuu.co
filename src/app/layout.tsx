@@ -55,7 +55,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${helvetica.variable} antialiased`}>{children}</body>
+      <body
+        className={`${helvetica.variable} antialiased [&::-webkit-scrollbar]:w-2
+      [&::-webkit-scrollbar]:h-1
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-gray-900
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-thumb]:bg-gray-400`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

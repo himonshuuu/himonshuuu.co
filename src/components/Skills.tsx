@@ -8,6 +8,7 @@ import {
   SiC,
   SiDebian,
   SiDocker,
+  SiDrizzle,
   SiEndeavouros,
   SiExpress,
   SiFastapi,
@@ -19,20 +20,17 @@ import {
   SiGithub,
   SiGithubactions,
   SiHono,
-  SiHuggingface,
-  SiHyprland,
   SiJavascript,
   SiKalilinux,
   SiLinuxmint,
+  SiLua,
   SiManjaro,
   SiMongodb,
   SiNeovim,
   SiNginx,
   SiNixos,
   SiNodedotjs,
-  SiNumpy,
   SiOpensuse,
-  SiPandas,
   SiParrotsecurity,
   SiPopos,
   SiPostgresql,
@@ -48,7 +46,6 @@ import {
   SiRender,
   SiRockylinux,
   SiSanic,
-  SiSelenium,
   SiShadcnui,
   SiSlackware,
   SiSqlite,
@@ -60,11 +57,10 @@ import {
 
 import { Marquee } from "@/components/ui/marquee";
 import React from "react";
-import { BsDashLg } from "react-icons/bs";
 import { CgVercel } from "react-icons/cg";
 import { DiGoogleCloudPlatform } from "react-icons/di";
 import { FaWindows } from "react-icons/fa";
-import { FaAws, FaDiscord } from "react-icons/fa6";
+import { FaAws } from "react-icons/fa6";
 import { FiFramer } from "react-icons/fi";
 import { RiNextjsFill } from "react-icons/ri";
 import { VscCodeOss } from "react-icons/vsc";
@@ -76,11 +72,11 @@ interface Item {
   color: string;
 }
 
-export const techCategories: Item[] = [
+const languageCategories: Item[] = [
   {
     name: "C",
     icon: SiC,
-    url: "https://www.gnu.org/oftware/gnu-c-manual",
+    url: "https://www.gnu.org/software/gnu-c-manual",
     color: "#A8B9CC",
   },
   {
@@ -101,6 +97,15 @@ export const techCategories: Item[] = [
     url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
     color: "#F7DF1E",
   },
+  {
+    name: "Lua",
+    icon: SiLua,
+    url: "https://www.lua.org/",
+    color: "#2C2D72",
+  },
+];
+
+const frontendCategories: Item[] = [
   {
     name: "React",
     icon: SiReact,
@@ -143,7 +148,9 @@ export const techCategories: Item[] = [
     url: "https://www.framer.com/motion/",
     color: "#0055FF",
   },
+];
 
+const backendCategories: Item[] = [
   {
     name: "Node.js",
     icon: SiNodedotjs,
@@ -186,6 +193,9 @@ export const techCategories: Item[] = [
     url: "https://docs.aiohttp.org/",
     color: "#2C5BB4",
   },
+];
+
+const databaseCategories: Item[] = [
   {
     name: "MongoDB",
     icon: SiMongodb,
@@ -217,6 +227,12 @@ export const techCategories: Item[] = [
     color: "#003B57",
   },
   {
+    name: "Drizzle",
+    icon: SiDrizzle,
+    url: "https://orm.drizzle.team/",
+    color: "#000000",
+  },
+  {
     name: "Redis",
     icon: SiRedis,
     url: "https://redis.io/",
@@ -228,6 +244,9 @@ export const techCategories: Item[] = [
     url: "https://supabase.com/",
     color: "#3FCF8E",
   },
+];
+
+const cloudCategories: Item[] = [
   {
     name: "Docker",
     icon: SiDocker,
@@ -276,50 +295,9 @@ export const techCategories: Item[] = [
     url: "https://github.com/features/actions",
     color: "#2088FF",
   },
-  {
-    name: "discord.js",
-    icon: FaDiscord,
-    url: "https://github.com/discordjs/discord.js",
-    color: "#5865F2",
-  },
+];
 
-  {
-    name: "Figma",
-    icon: SiFigma,
-    url: "https://figma.com",
-    color: "#F24E1E",
-  },
-  {
-    name: "NumPy",
-    icon: SiNumpy,
-    url: "https://numpy.org/",
-    color: "#013243",
-  },
-  {
-    name: "Pandas",
-    icon: SiPandas,
-    url: "https://pandas.pydata.org/",
-    color: "#150458",
-  },
-  {
-    name: "Hugging Face",
-    icon: SiHuggingface,
-    url: "https://huggingface.co/",
-    color: "#FFD21E",
-  },
-  {
-    name: "Beautiful Soup",
-    icon: SiPython,
-    url: "https://www.crummy.com/software/BeautifulSoup/bs4/doc/",
-    color: "#3776AB",
-  },
-  {
-    name: "Selenium",
-    icon: SiSelenium,
-    url: "https://www.selenium.dev/",
-    color: "#43B02A",
-  },
-
+const toolsCategories: Item[] = [
   {
     name: "Git",
     icon: SiGit,
@@ -337,12 +315,6 @@ export const techCategories: Item[] = [
     icon: SiNeovim,
     url: "https://neovim.io/",
     color: "#57A143",
-  },
-  {
-    name: "Hyprland",
-    icon: SiHyprland,
-    url: "https://hyprland.org/",
-    color: "#4E9BCD",
   },
   {
     name: "VSCode",
@@ -367,6 +339,12 @@ export const techCategories: Item[] = [
     icon: SiQemu,
     url: "https://www.qemu.org/",
     color: "#FF6600",
+  },
+  {
+    name: "Figma",
+    icon: SiFigma,
+    url: "https://figma.com",
+    color: "#F24E1E",
   },
 ];
 
@@ -489,25 +467,106 @@ export const osCategories: Item[] = [
 
 export default function SkillsSection() {
   return (
-    <section className="space-y-4">
-      <div className="flex items-center justify-center gap-2">
-        <BsDashLg size={48} className="text-foreground/30" />
-        <h2 className="text-2xl sm:text-3xl font-bold"> My Toolkit</h2>
-        <BsDashLg size={48} />
+    <section className="space-y-8">
+      <div className="flex items-center gap-2">
+        <div className="h-[4px] w-[20px] bg-foreground/20 my-3" />
+        <h2 className="skills-title text-xl sm:text-3xl font-bold">
+          My Toolkit
+        </h2>
       </div>
-      <Marquee className="[--duration:80s]" pauseOnHover>
-        {techCategories.map((skill) => (
-          <span
-            key={skill.name}
-            className="px-3 py-1 bg-foreground/10 rounded-full flex items-center gap-2 justify-center mx-2 flex-shrink-0"
-          >
-            <div className="relative z-10 flex items-center gap-2">
-              <skill.icon />
-              {skill.name}
-            </div>
-          </span>
-        ))}
-      </Marquee>
+      <div className="">
+        <Marquee className="[--duration:20s]" pauseOnHover>
+          {languageCategories.map((skill) => (
+            <span
+              key={skill.name}
+              className="skill-item px-2 sm:px-3 py-1 bg-foreground/10 rounded-full flex items-center gap-1.5 sm:gap-2 justify-center mx-1 sm:mx-2 flex-shrink-0 cursor-pointer hover:bg-foreground/20 transition-colors"
+            >
+              <div className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
+                <skill.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                {skill.name}
+              </div>
+            </span>
+          ))}
+        </Marquee>
+        <Marquee className="[--duration:40s]" pauseOnHover reverse>
+          {frontendCategories.map((skill) => (
+            <span
+              key={skill.name}
+              className="skill-item px-2 sm:px-3 py-1 bg-foreground/10 rounded-full flex items-center gap-1.5 sm:gap-2 justify-center mx-1 sm:mx-2 flex-shrink-0 cursor-pointer hover:bg-foreground/20 transition-colors"
+            >
+              <div className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
+                <skill.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                {skill.name}
+              </div>
+            </span>
+          ))}
+        </Marquee>
+        <Marquee className="[--duration:40s]" pauseOnHover>
+          {backendCategories.map((skill) => (
+            <span
+              key={skill.name}
+              className="skill-item px-2 sm:px-3 py-1 bg-foreground/10 rounded-full flex items-center gap-1.5 sm:gap-2 justify-center mx-1 sm:mx-2 flex-shrink-0 cursor-pointer hover:bg-foreground/20 transition-colors"
+            >
+              <div className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
+                <skill.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                {skill.name}
+              </div>
+            </span>
+          ))}
+        </Marquee>
+        <Marquee className="[--duration:50s]" pauseOnHover reverse>
+          {databaseCategories.map((skill) => (
+            <span
+              key={skill.name}
+              className="skill-item px-2 sm:px-3 py-1 bg-foreground/10 rounded-full flex items-center gap-1.5 sm:gap-2 justify-center mx-1 sm:mx-2 flex-shrink-0 cursor-pointer hover:bg-foreground/20 transition-colors"
+            >
+              <div className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
+                <skill.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                {skill.name}
+              </div>
+            </span>
+          ))}
+        </Marquee>
+        <Marquee className="[--duration:40s]" pauseOnHover>
+          {cloudCategories.map((skill) => (
+            <span
+              key={skill.name}
+              className="skill-item px-2 sm:px-3 py-1 bg-foreground/10 rounded-full flex items-center gap-1.5 sm:gap-2 justify-center mx-1 sm:mx-2 flex-shrink-0 cursor-pointer hover:bg-foreground/20 transition-colors"
+            >
+              <div className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
+                <skill.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                {skill.name}
+              </div>
+            </span>
+          ))}
+        </Marquee>
+        <Marquee className="[--duration:40s]" pauseOnHover reverse>
+          {toolsCategories.map((skill) => (
+            <span
+              key={skill.name}
+              className="skill-item px-2 sm:px-3 py-1 bg-foreground/10 rounded-full flex items-center gap-1.5 sm:gap-2 justify-center mx-1 sm:mx-2 flex-shrink-0 cursor-pointer hover:bg-foreground/20 transition-colors"
+            >
+              <div className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
+                <skill.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                {skill.name}
+              </div>
+            </span>
+          ))}
+        </Marquee>
+        <Marquee className="[--duration:40s]" pauseOnHover>
+          {osCategories.map((skill) => (
+            <span
+              key={skill.name}
+              className="skill-item px-2 sm:px-3 py-1 bg-foreground/10 rounded-full flex items-center gap-1.5 sm:gap-2 justify-center mx-1 sm:mx-2 flex-shrink-0 cursor-pointer hover:bg-foreground/20 transition-colors"
+            >
+              <div className="relative z-10 flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base">
+                <skill.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                {skill.name}
+              </div>
+            </span>
+          ))}
+        </Marquee>
+      </div>
     </section>
   );
 }
