@@ -11,7 +11,7 @@ export default function ContactSection() {
   return (
     <section className="space-y-6 sm:space-y-8">
       <div className="flex items-center gap-2">
-        <div className="h-[4px] w-[20px] bg-foreground/20 my-3" />
+        <div className="h-[4px] w-[20px] bg-foreground/20 my-3 rounded-full" />
         <h2 className="text-2xl sm:text-3xl font-bold">Get In Touch</h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 items-center">

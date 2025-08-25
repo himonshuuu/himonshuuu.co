@@ -469,12 +469,16 @@ export default function SkillsSection() {
   return (
     <section className="space-y-8">
       <div className="flex items-center gap-2">
-        <div className="h-[4px] w-[20px] bg-foreground/20 my-3" />
+        <div className="h-[4px] w-[20px] bg-foreground/20 my-3 rounded-full" />
         <h2 className="skills-title text-xl sm:text-3xl font-bold">
           My Toolkit
         </h2>
       </div>
-      <div className="">
+
+      <div className="relative">
+        <div className="pointer-events-none absolute left-0 top-0 z-20 h-full w-[90px] bg-gradient-to-r from-[#0b0a0a] via-background/80 to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 z-20 h-full w-[90px] bg-gradient-to-l from-[#0b0a0a] via-background/80  to-transparent" />
+
         <Marquee className="[--duration:20s]" pauseOnHover>
           {languageCategories.map((skill) => (
             <span
@@ -488,6 +492,7 @@ export default function SkillsSection() {
             </span>
           ))}
         </Marquee>
+
         <Marquee className="[--duration:40s]" pauseOnHover reverse>
           {frontendCategories.map((skill) => (
             <span
@@ -501,6 +506,7 @@ export default function SkillsSection() {
             </span>
           ))}
         </Marquee>
+
         <Marquee className="[--duration:40s]" pauseOnHover>
           {backendCategories.map((skill) => (
             <span
@@ -514,6 +520,7 @@ export default function SkillsSection() {
             </span>
           ))}
         </Marquee>
+
         <Marquee className="[--duration:50s]" pauseOnHover reverse>
           {databaseCategories.map((skill) => (
             <span
@@ -527,6 +534,7 @@ export default function SkillsSection() {
             </span>
           ))}
         </Marquee>
+
         <Marquee className="[--duration:40s]" pauseOnHover>
           {cloudCategories.map((skill) => (
             <span
@@ -540,6 +548,7 @@ export default function SkillsSection() {
             </span>
           ))}
         </Marquee>
+
         <Marquee className="[--duration:40s]" pauseOnHover reverse>
           {toolsCategories.map((skill) => (
             <span
@@ -553,6 +562,7 @@ export default function SkillsSection() {
             </span>
           ))}
         </Marquee>
+
         <Marquee className="[--duration:40s]" pauseOnHover>
           {osCategories.map((skill) => (
             <span

@@ -1,8 +1,8 @@
 "use client";
 
-import ProjectCard from "@/components/projectCard";
-import { useRef, useState, useEffect } from "react";
-import { HiChevronRight, HiChevronLeft } from "react-icons/hi";
+import ProjectCard from "@/components/ProjectCard";
+import { useEffect, useRef, useState } from "react";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 export default function ProjectsSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -10,10 +10,10 @@ export default function ProjectsSection() {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
 
   useEffect(() => {
+    const container = scrollContainerRef.current;
     const checkScroll = () => {
-      if (scrollContainerRef.current) {
-        const { scrollWidth, clientWidth, scrollLeft } =
-          scrollContainerRef.current;
+      if (container) {
+        const { scrollWidth, clientWidth, scrollLeft } = container;
         setShowRightArrow(
           scrollWidth > clientWidth && scrollLeft < scrollWidth - clientWidth
         );
@@ -24,14 +24,14 @@ export default function ProjectsSection() {
     checkScroll();
     window.addEventListener("resize", checkScroll);
 
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.addEventListener("scroll", checkScroll);
+    if (container) {
+      container.addEventListener("scroll", checkScroll);
     }
 
     return () => {
       window.removeEventListener("resize", checkScroll);
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.removeEventListener("scroll", checkScroll);
+      if (container) {
+        container.removeEventListener("scroll", checkScroll);
       }
     };
   }, []);
@@ -61,7 +61,7 @@ export default function ProjectsSection() {
         "A Linux tool that captures keyboard input events and gives you real-time state updates. Perfect for keystroke monitoring.",
       techStack: ["C lang"],
       githubUrl: "https://github.com/himonshuuu/waykey",
-      liveUrl: "", // No live URL for this project
+      liveUrl: "",
     },
     {
       title: "threadseer",
@@ -69,14 +69,14 @@ export default function ProjectsSection() {
         "A modern e-commerce website built with Next.js, Tailwind CSS, and TypeScript.",
       techStack: ["Next.js", "Express", "Razorpay"],
       githubUrl: "https://threadseer.shop",
-      liveUrl: "https://threadseer.shop", // No live URL for this project
+      liveUrl: "https://threadseer.shop",
     },
     {
       title: "ExStore",
       description: "About redis like in-memory database",
       techStack: ["Elixir"],
       githubUrl: "https://github.com/himonshuuu/exstore",
-      liveUrl: "", // No live URL for this project
+      liveUrl: "",
     },
     {
       title: "Meaning Khoj",
@@ -84,39 +84,33 @@ export default function ProjectsSection() {
         "A Chrome extension that helps users quickly find word definitions and translations while browsing.",
       techStack: ["HTML", "CSS", "JavaScript"],
       githubUrl: "https://github.com/himonshuuu/meaning-khoj",
-      liveUrl: "", // Chrome Web Store URL could be added here
+      liveUrl: "",
     },
     {
       title: "Quiz CLI",
       description: "A simple Quiz CLI built with python",
       techStack: ["Python", "Rich"],
       githubUrl: "https://github.com/himonshuuu/quiz-cli",
-      liveUrl: "", // No live URL for CLI tool
+      liveUrl: "",
     },
     {
       title: "Saavn.py",
       description: "A CLI tool to download songs from jio saavn",
       techStack: ["Python", "Httpx", "Rich"],
       githubUrl: "https://github.com/himonshuuu/saavn-py",
-      liveUrl: "", // No live URL for CLI tool
+      liveUrl: "",
     },
   ];
 
   return (
     <div className="relative">
       <div className="flex items-center gap-2">
-        <div className="h-[4px] w-[20px] bg-foreground/20 my-3" />
+        <div className="h-[4px] w-[20px] bg-foreground/20 my-3 rounded-full" />
         <h2 className="text-2xl sm:text-3xl font-bold">Projects</h2>
       </div>
       <div
         ref={scrollContainerRef}
-        className="flex overflow-x-auto flex-nowrap gap-4 w-full p-4 
-        [&::-webkit-scrollbar]:w-2
-        [&::-webkit-scrollbar]:h-1
-        [&::-webkit-scrollbar-track]:rounded-full
-        [&::-webkit-scrollbar-track]:bg-gray-900
-        [&::-webkit-scrollbar-thumb]:rounded-full
-        [&::-webkit-scrollbar-thumb]:bg-gray-400"
+        className="flex overflow-x-auto flex-nowrap gap-4 w-full p-4 "
       >
         {projects.map((project, index) => (
           <ProjectCard

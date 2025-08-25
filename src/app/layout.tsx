@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 
+import { Analytics } from "@vercel/analytics/react";
+
 const helvetica = localFont({
   src: [
     {
@@ -55,15 +57,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${helvetica.variable} antialiased [&::-webkit-scrollbar]:w-2
-      [&::-webkit-scrollbar]:h-1
-  [&::-webkit-scrollbar-track]:rounded-full
-  [&::-webkit-scrollbar-track]:bg-gray-900
-  [&::-webkit-scrollbar-thumb]:rounded-full
-  [&::-webkit-scrollbar-thumb]:bg-gray-400`}
-      >
+      <body className={`${helvetica.variable} antialiased `}>
         {children}
+        <Analytics />
       </body>
     </html>
   );

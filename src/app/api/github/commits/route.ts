@@ -3,6 +3,10 @@ import { NextResponse } from "next/server";
 interface ContributionDay {
     date: string;
     contributionCount: number;
+    contributions: {
+        message: string;
+        url: string;
+    }[];
 }
 
 export async function GET() {

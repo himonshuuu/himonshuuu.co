@@ -9,7 +9,7 @@ interface Commit {
   url: string;
 }
 
-export function GitCommitGraph({ className }: { className?: string }) {
+export default function GithubCommits({ className }: { className?: string }) {
   const [commitGraph, setCommitGraph] = useState<Commit[]>([]);
   const [loading, setLoading] = useState(true);
 
