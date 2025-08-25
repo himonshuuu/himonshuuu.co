@@ -26,14 +26,7 @@ export async function GET() {
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
-                    "Authorization": `Bearer ${tokenData.access_token}`,
-                    "Priority": "u=1, i",
-                    "Sec-Ch-Ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
-                    "Sec-Ch-Ua-Mobile": "?0",
-                    "Sec-Ch-Ua-Platform": "\"Linux\"",
-                    "Sec-Fetch-Dest": "empty",
-                    "Referer": "https://ptb.discord.com/",
-                    "Referrer-Policy": "strict-origin-when-cross-origin"
+                    "Authorization": `Bearer ${tokenData.access_token}`
                 },
                 method: "GET"
             }
