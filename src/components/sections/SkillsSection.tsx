@@ -60,10 +60,11 @@ import React from "react";
 import { CgVercel } from "react-icons/cg";
 import { DiGoogleCloudPlatform } from "react-icons/di";
 import { FaWindows } from "react-icons/fa";
-import { FaAws } from "react-icons/fa6";
+import { FaGolang , FaAws } from "react-icons/fa6";
 import { FiFramer } from "react-icons/fi";
 import { RiNextjsFill } from "react-icons/ri";
 import { VscCodeOss } from "react-icons/vsc";
+import { TbBrandCpp } from "react-icons/tb";
 
 interface Item {
   name: string;
@@ -78,6 +79,12 @@ const languageCategories: Item[] = [
     icon: SiC,
     url: "https://www.gnu.org/software/gnu-c-manual",
     color: "#A8B9CC",
+  },
+  {
+    name: "C++",
+    icon: TbBrandCpp,
+    url: "https://cppreference.com"
+    color: "#a8b9cc",
   },
   {
     name: "Python",
@@ -102,6 +109,12 @@ const languageCategories: Item[] = [
     icon: SiLua,
     url: "https://www.lua.org/",
     color: "#2C2D72",
+  },
+  {
+    name: "Golang",⁹
+    icon: FaGolang,
+    url: "https://go.dev",
+    color: "#61dafb",
   },
 ];
 
