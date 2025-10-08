@@ -83,7 +83,7 @@ const languageCategories: Item[] = [
   {
     name: "C++",
     icon: TbBrandCpp,
-    url: "https://cppreference.com"
+    url: "https://cppreference.com",fix
     color: "#a8b9cc",
   },
   {
