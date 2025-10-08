@@ -111,7 +111,7 @@ const languageCategories: Item[] = [
     color: "#2C2D72",
   },
   {
-    name: "Golang",⁹
+    name: "Golang",
     icon: FaGolang,
     url: "https://go.dev",
     color: "#61dafb",
