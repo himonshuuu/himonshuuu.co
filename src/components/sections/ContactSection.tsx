@@ -6,6 +6,7 @@ import {
   SiLinkedin,
   SiX,
 } from "react-icons/si";
+import { HiDownload } from "react-icons/hi";
 
 export default function ContactSection() {
   return (
@@ -15,17 +16,27 @@ export default function ContactSection() {
         <h2 className="text-2xl sm:text-3xl font-bold">Get In Touch</h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 items-center">
-        <p className="text-base sm:text-lg text-foreground/80">
-          I&apos;m open for freelancing opportunities and job positions! Whether
-          you have a project in mind or want to discuss potential
-          collaborations, feel free to reach out at{" "}
+        <div className="space-y-4">
+          <p className="text-base sm:text-lg text-foreground/80">
+            I&apos;m open for freelancing opportunities and job positions! Whether
+            you have a project in mind or want to discuss potential
+            collaborations, feel free to reach out at{" "}
+            <a
+              href="mailto:mail@himonshuuu.co"
+              className="font-medium border-b-2 border-foreground/20 hover:border-foreground/40 transition-colors"
+            >
+              mail@himonshuuu.co
+            </a>
+          </p>
           <a
-            href="mailto:mail@himonshuuu.co"
-            className="font-medium border-b-2 border-foreground/20 hover:border-foreground/40 transition-colors"
+            href="/resume.pdf"
+            download="Himanshu_Saikia_Resume.pdf"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-foreground text-background rounded-lg hover:bg-foreground/90 transition-colors font-medium text-sm w-fit"
           >
-            mail@himonshuuu.co
+            <HiDownload className="w-4 h-4" />
+            Download Resume
           </a>
-        </p>
+        </div>
         <div className="grid grid-cols-5 gap-3 sm:gap-4">
           <Link
             href="https://github.com/himonshuuu"
