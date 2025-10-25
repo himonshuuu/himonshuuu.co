@@ -3,23 +3,7 @@ import { SiNextdotjs, SiReact, SiTailwindcss, SiVercel } from "react-icons/si";
 
 import packageJson from "../../../package.json";
 
-interface CommitData {
-    sha: string;
-    html_url: string;
-    message: string;
-    commit: {
-        committer: {
-            name: string;
-            email: string;
-            date: string;
-        };
-    };
-    author: {
-        login: string;
-        avatar_url: string;
-        html_url: string;
-    };
-}
+
 
 export default function FooterSection() {
     return (

@@ -1,3 +1,4 @@
+
 import { BiData, BiWind } from "react-icons/bi";
 import {
   SiAiohttp,
@@ -65,13 +66,7 @@ import { FiFramer } from "react-icons/fi";
 import { RiNextjsFill } from "react-icons/ri";
 import { VscCodeOss } from "react-icons/vsc";
 import { TbBrandCpp } from "react-icons/tb";
-
-interface Item {
-  name: string;
-  icon: React.ElementType;
-  url: string;
-  color: string;
-}
+import { Item } from "@/types";
 
 const languageCategories: Item[] = [
   {
@@ -411,28 +406,10 @@ export const osCategories: Item[] = [
     color: "#EE0000",
   },
   {
-    name: "Kali Linux",
-    icon: SiKalilinux,
-    url: "https://www.kali.org/",
-    color: "#557C94",
-  },
-  {
     name: "Pop!_OS",
     icon: SiPopos,
     url: "https://pop.system76.com/",
     color: "#48B9C7",
-  },
-  {
-    name: "Alpine Linux",
-    icon: SiAlpinelinux,
-    url: "https://www.alpinelinux.org/",
-    color: "#0D597F",
-  },
-  {
-    name: "EndeavourOS",
-    icon: SiEndeavouros,
-    url: "https://endeavouros.com/",
-    color: "#7F3FBF",
   },
   {
     name: "OpenSUSE",
@@ -447,28 +424,10 @@ export const osCategories: Item[] = [
     color: "#87CF3E",
   },
   {
-    name: "Parrot OS",
-    icon: SiParrotsecurity,
-    url: "https://parrotsec.org/",
-    color: "#04BADE",
-  },
-  {
     name: "Slackware",
     icon: SiSlackware,
     url: "http://www.slackware.com/",
     color: "#3D3D3D",
-  },
-  {
-    name: "Rocky Linux",
-    icon: SiRockylinux,
-    url: "https://rockylinux.org/",
-    color: "#10B981",
-  },
-  {
-    name: "AlmaLinux",
-    icon: SiAlmalinux,
-    url: "https://almalinux.org/",
-    color: "#1D80D3",
   },
   {
     name: "Windows",

@@ -3,20 +3,62 @@
 import ProjectCard from "@/components/ProjectCard";
 import { useEffect, useRef, useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { FaGithub, FaStar } from "react-icons/fa";
+import { GithubRepo } from "@/types";
+import { FaCodeFork } from "react-icons/fa6";
+
+const GITHUB_USERNAME = "himonshuuu";
 
 export default function ProjectsSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showRightArrow, setShowRightArrow] = useState(false);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [repos, setRepos] = useState<GithubRepo[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Merge both API responses and unique by repo name
+  useEffect(() => {
+    async function fetchAndMergeRepos() {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const resPinned = await fetch("/api/github/repos?pinned=true");
+        const resStars = await fetch("/api/github/repos?topStars=true");
+
+        if (!resPinned.ok || !resStars.ok) throw new Error("Failed to fetch repositories");
+
+        const pinned: GithubRepo[] = await resPinned.json();
+        const topStars: GithubRepo[] = await resStars.json();
+
+        const repoMap = new Map<string, GithubRepo>();
+        pinned.forEach((repo) => {
+          repoMap.set(repo.name, repo);
+        });
+        topStars.forEach((repo) => {
+          if (!repoMap.has(repo.name)) {
+            repoMap.set(repo.name, repo);
+          }
+        });
+
+        setRepos(Array.from(repoMap.values()).slice(0, 10));
+      } catch (e: any) {
+        setError(e.message || "Failed to load");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchAndMergeRepos();
+  }, []);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
     const checkScroll = () => {
       if (container) {
         const { scrollWidth, clientWidth, scrollLeft } = container;
-        setShowRightArrow(
-          scrollWidth > clientWidth && scrollLeft < scrollWidth - clientWidth
-        );
+        setShowRightArrow(scrollWidth > clientWidth && scrollLeft < scrollWidth - clientWidth - 1);
         setShowLeftArrow(scrollLeft > 0);
       }
     };
@@ -34,111 +76,99 @@ export default function ProjectsSection() {
         container.removeEventListener("scroll", checkScroll);
       }
     };
-  }, []);
+  }, [repos, loading]);
 
-  const handleScrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: 300,
-        behavior: "smooth",
-      });
-    }
+  const handleScroll = (dir: "left" | "right") => {
+    if (!scrollContainerRef.current) return;
+    scrollContainerRef.current.scrollBy({
+      left: dir === "left" ? -340 : 340,
+      behavior: "smooth",
+    });
   };
-
-  const handleScrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: -300,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const projects = [
-    {
-      title: "waykey",
-      description:
-        "A Linux tool that captures keyboard input events and gives you real-time state updates. Perfect for keystroke monitoring.",
-      techStack: ["C lang"],
-      githubUrl: "https://github.com/himonshuuu/waykey",
-      liveUrl: "",
-    },
-    {
-      title: "threadseer",
-      description:
-        "A modern e-commerce website built with Next.js, Tailwind CSS, and TypeScript.",
-      techStack: ["Next.js", "Express", "Razorpay"],
-      githubUrl: "https://threadseer.shop",
-      liveUrl: "https://threadseer.shop",
-    },
-    {
-      title: "ExStore",
-      description: "About redis like in-memory database",
-      techStack: ["Elixir"],
-      githubUrl: "https://github.com/himonshuuu/exstore",
-      liveUrl: "",
-    },
-    {
-      title: "Meaning Khoj",
-      description:
-        "A Chrome extension that helps users quickly find word definitions and translations while browsing.",
-      techStack: ["HTML", "CSS", "JavaScript"],
-      githubUrl: "https://github.com/himonshuuu/meaning-khoj",
-      liveUrl: "",
-    },
-    {
-      title: "Quiz CLI",
-      description: "A simple Quiz CLI built with python",
-      techStack: ["Python", "Rich"],
-      githubUrl: "https://github.com/himonshuuu/quiz-cli",
-      liveUrl: "",
-    },
-    {
-      title: "Saavn.py",
-      description: "A CLI tool to download songs from jio saavn",
-      techStack: ["Python", "Httpx", "Rich"],
-      githubUrl: "https://github.com/himonshuuu/saavn-py",
-      liveUrl: "",
-    },
-  ];
 
   return (
-    <div className="relative">
-      <div className="flex items-center gap-2">
+    <section className="relative w-full">
+      <div className="flex items-center gap-2 mb-1">
         <div className="h-[4px] w-[20px] bg-foreground/20 my-3 rounded-full" />
         <h2 className="text-2xl sm:text-3xl font-bold">Projects</h2>
-      </div>
-      <div
-        ref={scrollContainerRef}
-        className="flex overflow-x-auto flex-nowrap gap-4 w-full p-4 "
-      >
-        {projects.map((project, index) => (
-          <ProjectCard
-            key={index}
-            title={project.title}
-            description={project.description}
-            techStack={project.techStack}
-            githubUrl={project.githubUrl}
-            liveUrl={project.liveUrl}
-          />
-        ))}
-      </div>
-      {showLeftArrow && (
-        <button
-          onClick={handleScrollLeft}
-          className="absolute left-0 top-1/2 -translate-y-1/2 bg-foreground/10 p-2 rounded-full hover:bg-foreground/20 transition-colors"
+        <a
+          href={`https://github.com/${GITHUB_USERNAME}?tab=repositories`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1 text-foreground/60 hover:text-foreground/90 text-xs ml-2 underline"
         >
-          <HiChevronLeft className="w-6 h-6" />
-        </button>
-      )}
-      {showRightArrow && (
-        <button
-          onClick={handleScrollRight}
-          className="absolute right-0 top-1/2 -translate-y-1/2 bg-foreground/10 p-2 rounded-full hover:bg-foreground/20 transition-colors"
+          <FaGithub className="w-4 h-4" /> More on GitHub
+        </a>
+      </div>
+      <p className="mb-2 text-foreground/60 text-sm max-w-2xl">
+        Here are some of my <b>pinned GitHub projects</b>. Check out more on my profile!
+      </p>
+      <div className="relative">
+        <div
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto flex-nowrap gap-6 w-full p-4 mx-0 md:mx-2 custom-scroll"
+          tabIndex={0}
+          aria-label="Pinned projects"
         >
-          <HiChevronRight className="w-6 h-6" />
-        </button>
-      )}
-    </div>
+          {loading ? (
+            Array.from({ length: 4 }).map((_, idx) => (
+              <div
+                key={idx}
+                className="animate-pulse bg-foreground/10 rounded-2xl w-[320px] h-[220px] flex-shrink-0 mx-2"
+              />
+            ))
+          ) : error ? (
+            <div className="text-center min-w-[300px] text-red-500 my-6">{error}</div>
+          ) : (
+            repos.map((repo) => (
+              <ProjectCard
+                key={repo.name}
+                title={repo.name}
+                description={repo.description || "No description"}
+                tags={[ 
+                  ...repo.languages
+                    .map((language: { name: string }) => language.name)
+                    .reverse(),
+                  ...(repo.stargazerCount
+                    ? [
+                        <span key="star" className="flex items-center justify-center gap-1">
+                          <FaStar size={14} /> {repo.stargazerCount}
+                        </span>,
+                      ]
+                    : []),
+                  ...(repo.forkCount
+                    ? [
+                        <span key="fork" className="flex items-center justify-center gap-1">
+                          <FaCodeFork size={14} /> {repo.forkCount}
+                        </span>,
+                      ]
+                    : []),
+                ]}
+                githubUrl={repo.url}
+                liveUrl={""}
+              />
+            ))
+          )}
+        </div>
+        {showLeftArrow && (
+          <button
+            aria-label="Scroll projects left"
+            onClick={() => handleScroll("left")}
+            className="absolute left-1 top-1/2 -translate-y-1/2 bg-foreground/10 p-2 rounded-full hover:bg-foreground/20 transition-colors shadow-lg z-10"
+          >
+            <HiChevronLeft className="w-7 h-7" />
+          </button>
+        )}
+        {showRightArrow && (
+          <button
+            aria-label="Scroll projects right"
+            onClick={() => handleScroll("right")}
+            className="absolute right-1 top-1/2 -translate-y-1/2 bg-foreground/10 p-2 rounded-full hover:bg-foreground/20 transition-colors shadow-lg z-10"
+          >
+            <HiChevronRight className="w-7 h-7" />
+          </button>
+        )}
+      </div>
+    </section>
   );
 }

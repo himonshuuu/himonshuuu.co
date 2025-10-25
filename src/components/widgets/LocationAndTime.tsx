@@ -49,7 +49,7 @@ export default function LocationTime({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "w-full sm:w-auto items-center gap-2 bg-foreground/5 rounded-md p-2",
+        "w-full sm:w-auto items-center gap-2 bg-foreground/5 rounded-lg border border-foreground/10 p-2",
         className
       )}
     >

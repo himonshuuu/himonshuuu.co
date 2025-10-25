@@ -3,22 +3,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
+import { SpotifyPlayer } from "@/types";
 
-interface SpotifyPlayer {
-  is_playing: boolean;
-  item: {
-    name: string;
-    external_urls: {
-      spotify: string;
-    };
-    artists: Array<{ name: string }>;
-    album: {
-      images: Array<{ url: string }>;
-    };
-    duration_ms: number;
-  };
-  progress_ms: number;
-}
 
 export default function SpotifyWidget({ className }: { className?: string }) {
   const [spotifyPlayer, setSpotifyPlayer] = useState<SpotifyPlayer | null>(
@@ -49,12 +35,11 @@ export default function SpotifyWidget({ className }: { className?: string }) {
             const currentProgress = startProgress + elapsed;
             const percentage = (currentProgress / data.item.duration_ms) * 100;
 
-            // if we've reached the end of the song
             if (percentage >= 100) {
               if (progressInterval.current) {
                 clearInterval(progressInterval.current);
               }
-              fetchSpotifyPlayer(); // fetch new song data
+              fetchSpotifyPlayer(); 
             } else {
               setProgressPercentage(percentage);
             }
@@ -66,8 +51,7 @@ export default function SpotifyWidget({ className }: { className?: string }) {
     };
 
     fetchSpotifyPlayer();
-    const fetchInterval = setInterval(fetchSpotifyPlayer, 30000); // fetch every 30 seconds
-
+    const fetchInterval = setInterval(fetchSpotifyPlayer, 30000); 
     return () => {
       clearInterval(fetchInterval);
       if (progressInterval.current) {
@@ -81,7 +65,7 @@ export default function SpotifyWidget({ className }: { className?: string }) {
       {spotifyPlayer?.is_playing ? (
         <div
           className={cn(
-            "w-full sm:w-auto bg-foreground/5 rounded-md p-2 relative overflow-hidden cursor-pointer",
+            "w-full sm:w-auto bg-foreground/5 rounded-lg border border-foreground/10 p-2 relative overflow-hidden cursor-pointer",
             className
           )}
           onClick={() => {
@@ -90,7 +74,7 @@ export default function SpotifyWidget({ className }: { className?: string }) {
         >
           {spotifyPlayer?.item && (
             <div
-              className="absolute bottom-0 left-0 h-0.5 bg-foreground/60"
+              className="absolute bottom-0 left-0 h-1 rounded-lg bg-foreground/60"
               style={{
                 width: `${progressPercentage}%`,
                 transition: "width 1s linear",

@@ -1,13 +1,6 @@
 import { NextResponse } from "next/server";
+import { ContributionDay } from "@/types";
 
-interface ContributionDay {
-    date: string;
-    contributionCount: number;
-    contributions: {
-        message: string;
-        url: string;
-    }[];
-}
 
 export async function GET() {
     const today = new Date();

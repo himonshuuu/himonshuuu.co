@@ -2,12 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { Commit } from "@/types";
 
-interface Commit {
-  date: Date;
-  count: number;
-  url: string;
-}
 
 export default function GithubCommits({ className }: { className?: string }) {
   const [commitGraph, setCommitGraph] = useState<Commit[]>([]);
@@ -41,20 +37,20 @@ export default function GithubCommits({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex items-center gap-2 bg-foreground/5 rounded-md p-1.5 w-fit",
+        "flex items-center gap-2 bg-foreground/5 rounded-lg border border-foreground/10 p-1.5 w-fit",
         className
       )}
     >
       <div className="grid grid-cols-19 gap-1">
         {loading
-          ? // Skeleton loading state
+          ? 
             Array.from({ length: 57 }).map((_, index) => (
               <div
                 key={index}
-                className="h-3 w-3 rounded-sm animate-pulse bg-foreground/10"
+                className="h-3 w-3 rounded-lg animate-pulse bg-foreground/10"
               />
             ))
-          : // Actual commit data
+          : 
             commitGraph.map((commit, index) => (
               <div key={index} className="relative group">
                 <div
