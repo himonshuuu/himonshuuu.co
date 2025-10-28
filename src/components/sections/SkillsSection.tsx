@@ -2,15 +2,12 @@
 import { BiData, BiWind } from "react-icons/bi";
 import {
   SiAiohttp,
-  SiAlmalinux,
-  SiAlpinelinux,
   SiArchlinux,
   SiBootstrap,
   SiC,
   SiDebian,
   SiDocker,
   SiDrizzle,
-  SiEndeavouros,
   SiExpress,
   SiFastapi,
   SiFedora,
@@ -22,7 +19,6 @@ import {
   SiGithubactions,
   SiHono,
   SiJavascript,
-  SiKalilinux,
   SiLinuxmint,
   SiLua,
   SiManjaro,
@@ -32,7 +28,6 @@ import {
   SiNixos,
   SiNodedotjs,
   SiOpensuse,
-  SiParrotsecurity,
   SiPopos,
   SiPostgresql,
   SiPostman,
@@ -45,7 +40,6 @@ import {
   SiRedis,
   SiRedux,
   SiRender,
-  SiRockylinux,
   SiSanic,
   SiShadcnui,
   SiSlackware,
@@ -53,20 +47,19 @@ import {
   SiSupabase,
   SiTmux,
   SiTypescript,
-  SiUbuntu,
+  SiUbuntu
 } from "react-icons/si";
 
 import { Marquee } from "@/components/ui/marquee";
-import React from "react";
+import { Item } from "@/types";
 import { CgVercel } from "react-icons/cg";
 import { DiGoogleCloudPlatform } from "react-icons/di";
 import { FaWindows } from "react-icons/fa";
-import { FaGolang , FaAws } from "react-icons/fa6";
+import { FaAws, FaGolang } from "react-icons/fa6";
 import { FiFramer } from "react-icons/fi";
 import { RiNextjsFill } from "react-icons/ri";
-import { VscCodeOss } from "react-icons/vsc";
 import { TbBrandCpp } from "react-icons/tb";
-import { Item } from "@/types";
+import { VscCodeOss } from "react-icons/vsc";
 
 const languageCategories: Item[] = [
   {

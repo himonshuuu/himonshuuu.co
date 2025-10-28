@@ -43,8 +43,9 @@ export default function ProjectsSection() {
         });
 
         setRepos(Array.from(repoMap.values()).slice(0, 10));
-      } catch (e: any) {
-        setError(e.message || "Failed to load");
+      } catch (e: unknown) {
+        const error = e as Error;
+        setError(error?.message || "Failed to load");
       } finally {
         setLoading(false);
       }

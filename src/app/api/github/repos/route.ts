@@ -82,9 +82,9 @@ export async function GET(request: Request) {
     }
 
     // Helper to extract/format all language nodes for each repo
-    function mapLanguages(languages: any) {
+    function mapLanguages(languages: { edges: { node: { name: string; color: string }; size: number }[] }) {
         if (!languages?.edges) return [];
-        return languages.edges.map((edge: any) => ({
+        return languages.edges.map((edge: { node: { name: string; color: string }; size: number }) => ({
             name: edge.node.name,
             color: edge.node.color,
             size: edge.size,
@@ -92,15 +92,15 @@ export async function GET(request: Request) {
     }
 
     // Format repo node to include all languages used, remove 'owner' from returned object
-    function formatRepo(repo: any) {
-        const { owner, ...rest } = repo;
+    function formatRepo(repo: { name: string; description: string; url: string; primaryLanguage: { name: string; color: string }; languages: { edges: { node: { name: string; color: string }; size: number }[] }; stargazerCount: number; forkCount: number; owner: { login: string; __typename: string } }) {
+        const {...rest } = repo;
         return {
             ...rest,
             languages: mapLanguages(repo.languages),
         };
     }
 
-    const isUserOwned = (repo: any) => {
+    const isUserOwned = (repo: { owner: { login: string; __typename: string } }) => {
         // Only keep repos that are owned directly by the user
         return repo.owner && repo.owner.login === "himonshuuu" && repo.owner.__typename === "User";
     };
@@ -114,7 +114,7 @@ export async function GET(request: Request) {
         // Only user-owned repos sorted by stargazerCount
         result = data.user.repositories.nodes
             .filter(isUserOwned)
-            .sort((a: any, b: any) => b.stargazerCount - a.stargazerCount)
+            .sort((a: { stargazerCount: number }, b: { stargazerCount: number }) => b.stargazerCount - a.stargazerCount)
             .slice(0, 6)
             .map(formatRepo);
     } else {
